@@ -17,6 +17,7 @@ import java.util.Date;
 @Transactional
 public class employee {
 
+
         @Id
         @Column(name = "id_pracownika")
         private Long id;

@@ -2,6 +2,7 @@ package com.ktounsi.assessment.employee.entity;
 
 
 import com.ktounsi.assessment.address.entity.Address;
+import com.ktounsi.assessment.department.entity.Department;
 import com.ktounsi.assessment.position.entity.Position;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,6 +47,9 @@ public class Employee {
 
         @Column(name = "Wynagrodzenie")
         private Double salary;
+
+        @OneToOne
+        private Department department;
 
         @OneToOne
         private Position position;

@@ -1,6 +1,7 @@
 package com.ktounsi.assessment.employee.entity;
 
 
+import com.ktounsi.assessment.address.entity.Address;
 import com.ktounsi.assessment.position.entity.Position;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Employee {
 
         @Id
         @GeneratedValue(strategy=GenerationType.SEQUENCE)
-        @Column(name = "Id_pracownika")
+        @Column(name = "Id_Pracownika")
         private Long id;
 
         @Column(name = "Imię" , length = 30)
@@ -31,6 +32,8 @@ public class Employee {
         @Column(name = "Nazwisko", length = 30)
         private String lastName;
 
+        @OneToOne
+        private Address address;
 
         @Column(name = "Email", length = 80)
         private String email;

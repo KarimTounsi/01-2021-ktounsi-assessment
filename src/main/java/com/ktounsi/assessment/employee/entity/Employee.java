@@ -1,6 +1,7 @@
 package com.ktounsi.assessment.employee.entity;
 
 
+import com.ktounsi.assessment.position.entity.Position;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,21 +11,24 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Date;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity
 @Table(name = "Pracownicy")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Transactional
-public class employee {
+public class Employee {
 
         @Id
-        @Column(name = "id_pracownika")
+        @GeneratedValue(strategy=GenerationType.SEQUENCE)
+        @Column(name = "Id_pracownika")
         private Long id;
 
-        @Column(name = "imię" , length = 30)
+        @Column(name = "Imię" , length = 30)
         private String firstName;
 
-        @Column(name = "nazwisko", length = 30)
+        @Column(name = "Nazwisko", length = 30)
         private String lastName;
 
 
@@ -39,6 +43,9 @@ public class employee {
 
         @Column(name = "Wynagrodzenie")
         private Double salary;
+
+        @OneToOne
+        private Position position;
 
 
 }

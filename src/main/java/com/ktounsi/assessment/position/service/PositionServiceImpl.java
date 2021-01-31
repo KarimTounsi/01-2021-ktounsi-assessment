@@ -20,7 +20,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public Position getById(Long id) {
         Optional<Position> optionalPosition = positionRepository.findById(id);
-        if (optionalPosition.isEmpty()) throw new ObjectNotFoundException("not.found.address");
+        if (optionalPosition.isEmpty()) throw new ObjectNotFoundException("not.found.position");
         return optionalPosition.get();
     }
 

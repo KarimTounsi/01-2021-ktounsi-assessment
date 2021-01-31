@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Position {
 
         @Id
-        @GeneratedValue(strategy=GenerationType.SEQUENCE)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="position_SEQ")
         @Column(name = "Id_Stanowiska")
         private Long id;
 

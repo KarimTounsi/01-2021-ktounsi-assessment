@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -23,7 +24,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Employee {
 
         @Id
-        @GeneratedValue(strategy=GenerationType.SEQUENCE)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="employee_SEQ")
         @Column(name = "Id_Pracownika")
         private Long id;
 
@@ -43,10 +44,10 @@ public class Employee {
         private Integer phoneNumber;
 
         @Column(name = "Data_Zatrudnienia")
-        private Date dateOfEmployment;
+        private LocalDate dateOfEmployment;
 
         @Column(name = "Wynagrodzenie")
-        private Double salary;
+        private Integer salary;
 
         @OneToOne
         private Department department;

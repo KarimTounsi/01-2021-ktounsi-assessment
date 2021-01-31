@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 public class Department {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="department_SEQ")
         @Column(name = "Id_Działu")
         private Long id;
 

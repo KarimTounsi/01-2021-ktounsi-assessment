@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 public class Address {
 
         @Id
-        @GeneratedValue(strategy=GenerationType.SEQUENCE)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE , generator="address_SEQ" )
         @Column(name = "Id_Adresu")
         private Long id;
 

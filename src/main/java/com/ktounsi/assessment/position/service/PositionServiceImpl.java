@@ -15,7 +15,7 @@ import java.util.Optional;
 @Transactional
 public class PositionServiceImpl implements PositionService {
 
-    PositionRepository positionRepository;
+    private final PositionRepository positionRepository;
 
     @Override
     public Position getById(Long id) {

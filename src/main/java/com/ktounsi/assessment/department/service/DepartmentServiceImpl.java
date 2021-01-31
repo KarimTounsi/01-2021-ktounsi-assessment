@@ -15,7 +15,7 @@ import java.util.Optional;
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
-    DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
 
 
     @Override

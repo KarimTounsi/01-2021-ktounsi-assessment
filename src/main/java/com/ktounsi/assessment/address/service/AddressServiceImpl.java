@@ -14,7 +14,7 @@ import java.util.Optional;
 @Transactional
 public class AddressServiceImpl implements AddressService {
 
-    AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
 
     @Override

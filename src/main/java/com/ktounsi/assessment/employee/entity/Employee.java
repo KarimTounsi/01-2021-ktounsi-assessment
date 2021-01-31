@@ -34,7 +34,7 @@ public class Employee {
         @Column(name = "Nazwisko", length = 30)
         private String lastName;
 
-        @OneToOne
+        @OneToOne(cascade = CascadeType.REMOVE)
         private Address address;
 
         @Column(name = "Email", length = 80)

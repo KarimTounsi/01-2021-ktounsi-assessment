@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ktounsi.assessment.address.service.AddressService;
 import com.ktounsi.assessment.department.service.DepartmentService;
 import com.ktounsi.assessment.employee.entity.Employee;
+import com.ktounsi.assessment.employee.objectClass.AverageSalary;
 import com.ktounsi.assessment.employee.service.EmployeeService;
 import com.ktounsi.assessment.exceptions.ObjectNotFoundException;
 import com.ktounsi.assessment.position.service.PositionService;
@@ -15,8 +16,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
+
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/employee")
@@ -62,16 +66,15 @@ public class EmployeeRestController {
     }
 
 
-
     @GetMapping("/{id}")
-    public ResponseEntity getOne(@PathVariable Long id){
+    public ResponseEntity getOne(@PathVariable Long id) {
 
         try {
             Employee employee = employeeService.getById(id);
             if (employee != null) {
                 return ResponseEntity.ok(employee);
             }
-        }catch (ObjectNotFoundException o){
+        } catch (ObjectNotFoundException o) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.notFound().build();
@@ -92,7 +95,7 @@ public class EmployeeRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateOne(@PathVariable Long id,@RequestBody Employee employee) {
+    public ResponseEntity updateOne(@PathVariable Long id, @RequestBody Employee employee) {
 
         if (employeeService.getById(id) != null) {
             Employee employeeUpdated = employeeService.update(id, employee);
@@ -103,8 +106,36 @@ public class EmployeeRestController {
 
     }
 
+    @GetMapping("/service/list/")
+    public ResponseEntity<List<AverageSalary>> list() {
+
+        List<Employee> employeeList = employeeService.getAll();
+        List<AverageSalary> list = new ArrayList<>();
+        Iterator<Employee> iterator = employeeList.iterator();
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
+            list.add(new AverageSalary(employee.getPosition().getName(), employee.getSalary(),
+
+                    LocalDate.now().getYear() - employee.getDateOfEmployment().getYear() - 1));
+        }
 
 
+        Map<String, Map<Integer, Double>> res = list.stream()
+                .collect(Collectors.groupingBy(AverageSalary::getPositionName,
+                        Collectors.groupingBy(AverageSalary::getYears,
+                                Collectors.averagingDouble(AverageSalary::getAvgSalary))));
 
+        List<AverageSalary> averageSalaries = res.entrySet()
+                .stream()
+                .flatMap(PositionName -> PositionName.getValue()
+                        .entrySet().stream()
+                        .map(YearsAndAvgSalary -> new AverageSalary(PositionName.getKey(),
+                                YearsAndAvgSalary.getValue().intValue(),
+                                YearsAndAvgSalary.getKey() ))).filter(averageSalary -> averageSalary.getYears()!=0)
+                .collect(Collectors.toList());
+
+
+        return ResponseEntity.ok(averageSalaries);
+    }
 
 }

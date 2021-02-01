@@ -28,4 +28,5 @@ public class Department {
         @OneToOne
         private Address location;
 
+
 }

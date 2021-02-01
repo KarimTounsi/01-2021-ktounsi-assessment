@@ -106,7 +106,7 @@ public class EmployeeRestController {
 
     }
 
-    @GetMapping("/service/list/")
+    @GetMapping("/list/")
     public ResponseEntity<List<AverageSalary>> list() {
 
         List<Employee> employeeList = employeeService.getAll();

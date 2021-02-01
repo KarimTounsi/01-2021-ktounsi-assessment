@@ -4,10 +4,7 @@ package com.ktounsi.assessment.employee.entity;
 import com.ktounsi.assessment.address.entity.Address;
 import com.ktounsi.assessment.department.entity.Department;
 import com.ktounsi.assessment.position.entity.Position;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -21,6 +18,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "Pracownicy")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Transactional
+@Builder
 public class Employee {
 
         @Id

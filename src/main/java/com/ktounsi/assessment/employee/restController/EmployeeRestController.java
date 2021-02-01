@@ -59,10 +59,9 @@ public class EmployeeRestController {
 
     @GetMapping
     public ResponseEntity<List<Employee>> getAll() {
-
         List<Employee> employeeList = employeeService.getAll();
-
-        return ResponseEntity.ok(employeeList);
+        List<Employee> resultEmployeeList =  employeeList.stream().sorted(Comparator.comparing(Employee::getId)).collect(Collectors.toList());
+        return ResponseEntity.ok(resultEmployeeList);
     }
 
 

@@ -159,9 +159,7 @@ $(function () {
                 });
             });
         }
-
         deleteEmployee();
     }
-
     ajax();
 });
